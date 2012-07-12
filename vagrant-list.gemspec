@@ -4,9 +4,9 @@ require File.expand_path('../lib/vagrant-list/version', __FILE__)
 Gem::Specification.new do |gem|
   gem.authors       = ["Josh McArthur"]
   gem.email         = ["joshua.mcarthur@gmail.com"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
-  gem.homepage      = ""
+  gem.description   = %q{Extends Vagrant with a 'list' command to list known VirtualBox virtual machines}
+  gem.description   = %q{Extends Vagrant with a 'list' command to list known VirtualBox virtual machines}
+  gem.homepage      = "https://github.com/joshmcarthur/vagrant-list"
 
   gem.files         = `git ls-files`.split($\)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
@@ -16,5 +16,4 @@ Gem::Specification.new do |gem|
   gem.version       = Vagrant::List::VERSION
 
   gem.add_runtime_dependency "vagrant"
-  gem.add_runtime_dependency "activesupport"
 end
