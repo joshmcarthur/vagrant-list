@@ -13,6 +13,15 @@ module Vagrant
       process!
     end
 
+
+    # Public - Override inspect to display
+    # vm attributes
+    def inspect
+      "#{uuid}: #{name} (#{guest_os})"
+    end
+
+    private
+
     # Private - Accept raw output from VBoxManage showvminfo command
     # and manipulate string into a useful form.
     #
