@@ -7,9 +7,17 @@ module Vagrant
   module List
     class All < ::Vagrant::Command::Base
       def execute
-        names = Driver::VirtualBox.new(nil).read_vms
+        all = Driver::VirtualBox.new(nil).read_vms(:vms)
+        @env.ui.info "ALL:"
+        all.each do |uuid|
+          @env.ui.info Vagrant::VMInfo.new(uuid).inspect
+        end
 
-        pp names.map { |uuid| Vagrant::VMInfo.new(uuid).uuid }
+        running = Driver::VirtualBox.new(nil).read_vms(:runningvms)
+        @env.ui.info "RUNNING:"
+        running.each do |uuid|
+          @env.ui.info Vagrant::VMInfo.new(uuid).inspect
+        end
       end
     end
   end
