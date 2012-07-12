@@ -16,4 +16,5 @@ Gem::Specification.new do |gem|
   gem.version       = Vagrant::List::VERSION
 
   gem.add_runtime_dependency "vagrant"
+  gem.add_runtime_dependency "activesupport"
 end
