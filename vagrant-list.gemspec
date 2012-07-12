@@ -5,7 +5,7 @@ Gem::Specification.new do |gem|
   gem.authors       = ["Josh McArthur"]
   gem.email         = ["joshua.mcarthur@gmail.com"]
   gem.description   = %q{Extends Vagrant with a 'list' command to list known VirtualBox virtual machines}
-  gem.description   = %q{Extends Vagrant with a 'list' command to list known VirtualBox virtual machines}
+  gem.summary   = %q{Extends Vagrant with a 'list' command to list known VirtualBox virtual machines}
   gem.homepage      = "https://github.com/joshmcarthur/vagrant-list"
 
   gem.files         = `git ls-files`.split($\)
