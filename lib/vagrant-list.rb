@@ -1,10 +1,10 @@
 require "vagrant-list/version"
-require "vagrant/driver/virtualbox"
+require "vagrant"
 require "pp"
 
 module Vagrant
   module List
-    class All
+    class All < ::Vagrant::Command::Base
       def execute
         driver = Driver::VirtualBox.new(nil)
         pp driver.read_vms
