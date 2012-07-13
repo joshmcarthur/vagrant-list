@@ -1,4 +1,5 @@
 require "vagrant-list/version"
+require "vagrant/ext/driver/driver_overrides"
 require "vagrant/vm_info"
 require "vagrant"
 require "pp"
@@ -23,4 +24,5 @@ module Vagrant
   end
 end
 
+Vagrant::Driver::VirtualBox_4_1.send(:include, Vagrant::Ext::Driver::DriverOverrides)
 Vagrant.commands.register(:list) { Vagrant::List::All }
