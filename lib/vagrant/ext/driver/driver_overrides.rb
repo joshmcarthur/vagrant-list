@@ -18,6 +18,7 @@ module Vagrant
           def read_vms(type = :vms)
             results = []
             execute("list", type.to_s, :retryable => true).split("\n").each do |line|
+              next if line =~ /\A"<inaccessible>"/
               if vm = line[/^".+?" \{(.+?)\}$/, 1]
                 results << vm
               end
