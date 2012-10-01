@@ -25,4 +25,5 @@ module Vagrant
 end
 
 Vagrant::Driver::VirtualBox_4_1.send(:include, Vagrant::Ext::Driver::DriverOverrides)
+Vagrant::Driver::VirtualBox_4_2.send(:include, Vagrant::Ext::Driver::DriverOverrides)
 Vagrant.commands.register(:list) { Vagrant::List::All }
