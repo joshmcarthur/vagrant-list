@@ -17,11 +17,15 @@ module Vagrant
           # it is used to query for a list of VMs to display
           def read_vms(type = :vms)
             results = []
-            execute("list", type.to_s, :retryable => true).split("\n").each do |line|
-              next if line =~ /\A"<inaccessible>"/
-              if vm = line[/^".+?" \{(.+?)\}$/, 1]
-                results << vm
+            begin
+              execute("list", type.to_s, :retryable => true).split("\n").each do |line|
+                next if line =~ /\A"<inaccessible>"/
+                if vm = line[/^".+?" \{(.+?)\}$/, 1]
+                  results << vm
+                end
               end
+            rescue 
+              puts "Could not list #{type.to_s}"
             end
 
             results
