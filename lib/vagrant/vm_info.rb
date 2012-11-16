@@ -35,7 +35,7 @@ module Vagrant
 
         if raw_key
           key = raw_key.downcase.gsub(/\s+/, '_')
-          self.send("#{key}=", value) if self.respond_to?("#{key}=")
+          self.send("#{key}=", value) if self.respond_to?("#{key}=") && !self.send(key)
         end
       end
 
