@@ -24,7 +24,7 @@ module Vagrant
                   results << vm
                 end
               end
-            rescue 
+            rescue
               puts "Could not list #{type.to_s}"
             end
 
