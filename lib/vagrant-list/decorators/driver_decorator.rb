@@ -1,9 +1,9 @@
 module Vagrant
-  module Ext
-  module Driver
-    module DriverOverrides
-      def self.included(base)
-        base.class_eval do
+  module List
+    module Decorators
+      module DriverDecorator
+        def self.included(base)
+          base.class_eval do
 
           # Public - Support passing in a category
           # of vms to list.
@@ -33,6 +33,5 @@ module Vagrant
         end
       end
     end
-  end
   end
 end
