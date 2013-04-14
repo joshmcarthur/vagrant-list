@@ -28,6 +28,14 @@ Vagrant.require_plugin "vagrant-list"
 
 If you are still using a gem version though, it's worth considering the package upgrade, as that seems to be the preferred way for end-users to install Vagrant nowadays and will probably be better supported than a gem install.
 
+##### Vagrant < 1.1.x
+
+If you are using a version of Vagrant older than 1.1.x, then you need to install an older version of this gem from Rubygems - only 0.0.5 and below will work with Vagrant 1.0.x:
+
+`gem install vagrant-list --version "0.0.5"`
+
+Please note that versions older than 0.0.5 **will not** work with Vagrant 1.1.x and above.
+
 ### How do I use it?
 
 #### From the CLI
