@@ -23,7 +23,7 @@ module Vagrant
       control of vagrant boxes.
       DESC
 
-      command(:list) do
+      command "list" do
         require_relative 'command'
         Command
       end
