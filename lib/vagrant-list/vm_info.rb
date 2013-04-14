@@ -1,3 +1,5 @@
+require 'vagrant/util'
+
 module Vagrant
   module List
     class VMInfo
@@ -9,8 +11,7 @@ module Vagrant
       attr_accessor :guest_os
 
       def initialize(uuid)
-        driver = Driver::VirtualBox.new
-        self.raw = driver.execute("showvminfo", uuid)
+        self.raw = `VBoxManage showvminfo #{uuid}`
         process!
       end
 
