@@ -9,7 +9,7 @@ end
 if Vagrant::VERSION < "1.1.0"
   raise <<-WARN
   The vagrant-list plugin is only compatible with Vagrant 1.1+.
-  See https://github.com/joshmcarthur/vagrant-list/tree/1.0 for a 1.0.x-comaptible version
+  See https://github.com/joshmcarthur/vagrant-list/tree/1.0.x for a 1.0.x-comaptible version
   WARN
 end
 
