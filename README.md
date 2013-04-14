@@ -8,11 +8,25 @@ vagrant-list
 
 ### How do I install it?
 
-#### Using bundler?
-Just add `gem 'vagrant-list'` to your `Gemfile`
+If you are using the packaged version of `vagrant` from [the Vagrant homepage]()http://downloads.vagrantup.com/) then you simply install this gem as a plugin by entering the following command in your terminal:
 
-#### Not using bundler?
-Untested, but just running `gem install vagrant-list` should have the same effect.
+``` bash
+vagrant plugin install vagrant-list
+```
+
+If you have vagrant installed from Rubygems, then you need to do a little more work - first, you can install the gem from [Rubygems](https://rubygems.org):
+
+``` bash
+gem install vagrant-list
+```
+
+Next, you need to tell Vagrant about this plugin, by adding to your project's `Vagrantfile`:
+
+``` ruby
+Vagrant.require_plugin "vagrant-list"
+```
+
+If you are still using a gem version though, it's worth considering the package upgrade, as that seems to be the preferred way for end-users to install Vagrant nowadays and will probably be better supported than a gem install.
 
 ### How do I use it?
 
@@ -20,7 +34,7 @@ Untested, but just running `gem install vagrant-list` should have the same effec
 `vagrant-list` adds just one command to vagrant - `list`. 
 For example, this following command will list the VMs:
 
-`bundle exec vagrant list` will output:
+`vagrant list` will output:
 
 ``` sh
 [vagrant] ALL:
@@ -35,26 +49,48 @@ For example, this following command will list the VMs:
 
 #### From your own code
 
-`vagrant-list` handily extends the driver for VirtualBox 4.1 to query both running and all VMs (previous to this you could only query all). If you'd like to use this feature in your code, you should just be able to add the gem to your `Gemfile`, and then run:
+If you need to acquire the same sort of list that the `vagrant list` command does, but programmatically, feel free to leverage a gem module that wraps around a couple of `VBoxManage` shell commands, like this:
 
+``` ruby
+require 'vagrant-list'
 
-`Vagrant::Driver::VirtualBox.new(nil).read_vms(:vms)` to show **all** VMs (default), or `Vagrant::Driver::VirtualBox.new(nil).read_vms(:runningvms)` to show **running** VMs.
+Vagrant::List::VirtualBox::List.all # Returns all VMs
+Vagrant::List::VirtualBox::List.running # Returns only running VMs
+```
+
+The two methods above return an array of UUIDs. If you want to gather further information about a VM, you may also use another class - `Vagrant::List::VMInfo`, like so:
+
+``` ruby
+require 'vagrant-list`
+	
+Vagrant::List::VirtualBox::List.all.map do |uuid|
+  puts Vagrant::List::VMInfo.new(uuid).inspect
+end
+```
 
 ### Running Tests
 
-The code has exactly three specs that check:
+Tests for this type of gem are slightly problematic, since much of the core functionality involves shelling out, which is inherently difficult to test, however there are tests to ensure that methods are called as designed, and that helper classes function the way they should.
 
-* That the overridden driver method lists a known VM
-* That the overridden driver method does not list an unknown VM
-* That the overridden driver method lists a running VM
+To run the tests, follow the steps below:
 
-Unfortunately, because we are almost directly interacting with the VirtualBox command line tools, there is little opportunity for mocking or stubbing virtual machines. 
+1. Clone the project: `git clone https://github.com/joshmcarthur/vagrant-list.git`
+2. Install dependencies: `bundle install`
+3. Create a virtual machine named `Test` and boot it up
+4. Run the tests: `rake spec`
 
-**Therefore, in order for the specs to pass, it is required that you have a VM called 'Test' running when the specs are run. It doesn't matter what this VM _is_ (XP, Ubuntu etc.), just as long as it's there**
+
+** Remember, in order for the specs to pass, it is required that you have a VM called 'Test' running when the specs are run. It doesn't matter what this VM _is_ (XP, Ubuntu etc.), just as long as it's there**
+
+### Contributing
+
+1. Fork and clone the project
+2. Run specs and make sure everything is passing
+3. Install the plugin into your vagrant install from the local source and run `vagrant list` to test: `rake build && vagrant plugin install pkg/vagrant-list-#{version}.gem && vagrant list`.
+4. Make your changes, rinse and repeat steps 2 & 3 often
+5. Push your changes in a `feature` or `bugfix` branch to Github.
+6. Send me a pull request!
 
 ### License
 
-This open source software is licensed under the MIT License.
-
----
-** If this project has been useful to you, I ask that you consider a donation to an open source project in need - check out my donations page at http://joshmcarthur.com/donations for projects that I've donated to for inspiration.**
+This open source software is licensed under the MIT License. For more details, see `./LICENSE.txt`.
