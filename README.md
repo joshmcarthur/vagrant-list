@@ -6,13 +6,16 @@ vagrant-list
 `vagrant-list` adds a command to the Vagrant CLI to list both all VMs known to VirtualBox, as well as any that are running. It's handy for seeing what all your VMs are up to.
 
 
-### How do I install it?
+### How do I install it using `vagrant`?
 
-If you are using the packaged version of `vagrant` from [the Vagrant homepage]()http://downloads.vagrantup.com/) then you simply install this gem as a plugin by entering the following command in your terminal:
+If you are using the packaged version of `vagrant` from [the Vagrant homepage](http://downloads.vagrantup.com/) then you simply install this gem as a plugin by entering the following command in your terminal:
 
 ``` bash
 vagrant plugin install vagrant-list
 ```
+
+
+### How do I install it using Rubygems?
 
 If you have vagrant installed from Rubygems, then you need to do a little more work - first, you can install the gem from [Rubygems](https://rubygems.org):
 
@@ -26,7 +29,7 @@ Next, you need to tell Vagrant about this plugin, by adding to your project's `V
 Vagrant.require_plugin "vagrant-list"
 ```
 
-If you are still using a gem version though, it's worth considering the package upgrade, as that seems to be the preferred way for end-users to install Vagrant nowadays and will probably be better supported than a gem install.
+**If you are still using a gem version though, it's worth considering the package upgrade, as that seems to be the preferred way for end-users to install Vagrant nowadays and will probably be better supported than a gem install.**
 
 ##### Vagrant < 1.1.x
 
@@ -39,7 +42,7 @@ Please note that versions older than 0.0.5 **will not** work with Vagrant 1.1.x 
 ### How do I use it?
 
 #### From the CLI
-`vagrant-list` adds just one command to vagrant - `list`. 
+`vagrant-list` adds just one command to vagrant - `list`.
 For example, this following command will list the VMs:
 
 `vagrant list` will output:
@@ -70,7 +73,7 @@ The two methods above return an array of UUIDs. If you want to gather further in
 
 ``` ruby
 require 'vagrant-list`
-	
+
 Vagrant::List::VirtualBox::List.all.map do |uuid|
   puts Vagrant::List::VMInfo.new(uuid).inspect
 end
