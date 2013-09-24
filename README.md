@@ -58,6 +58,14 @@ For example, this following command will list the VMs:
 [vagrant] ebb807dd-64d6-4a17-87f8-1d6d80a3f467: IE8 (Windows 7)
 ```
 
+#### On Windows
+
+The Windows installer for VirtualBox may not have added VirtualBox to the `PATH`.
+
+On a typical Windows install, the installation directory is `C:\Program Files\Oracle\VirtualBox`.
+
+Add this installation directory to your `PATH` from [`%windir%\System32\rundll32.exe sysdm.cpl,EditEnvironmentVariables`](http://superuser.com/a/284351/4888).
+
 #### From your own code
 
 If you need to acquire the same sort of list that the `vagrant list` command does, but programmatically, feel free to leverage a gem module that wraps around a couple of `VBoxManage` shell commands, like this:
@@ -89,7 +97,6 @@ To run the tests, follow the steps below:
 2. Install dependencies: `bundle install`
 3. Create a virtual machine named `Test` and boot it up
 4. Run the tests: `rake spec`
-
 
 ** Remember, in order for the specs to pass, it is required that you have a VM called 'Test' running when the specs are run. It doesn't matter what this VM _is_ (XP, Ubuntu etc.), just as long as it's there**
 
